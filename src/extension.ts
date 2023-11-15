@@ -12,7 +12,7 @@ let websocketServer: ReturnType<typeof createWebsocketServer> | null = null;
 export function activate(context: vscode.ExtensionContext) {
   vscode.commands.registerCommand(
     "react-mockups.openMockup",
-    (args: { mockup: { fullPath: string; exportName: string } }) => {
+    (args: { mockup: { fullPath: string; moduleExportKey: string } }) => {
       const localWorkspace =
         vscode.workspace
           .getWorkspaceFolder(vscode.Uri.file(args.mockup.fullPath))
@@ -27,7 +27,7 @@ export function activate(context: vscode.ExtensionContext) {
         "[openMockup]: " +
           JSON.stringify({
             path: relativePath,
-            exportName: args.mockup.exportName,
+            moduleExportKey: args.mockup.moduleExportKey,
           })
       );
 
@@ -36,7 +36,7 @@ export function activate(context: vscode.ExtensionContext) {
       }
       websocketServer.broadcast("VIEW", {
         path: relativePath,
-        exportName: args.mockup.exportName,
+        moduleExportKey: args.mockup.moduleExportKey,
       });
     }
   );

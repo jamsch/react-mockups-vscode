@@ -7,7 +7,7 @@ export function createWebsocketServer(hostname = "127.0.0.1", port = 1337) {
     clients: [] as WebSocket[],
     activeMockup: null as null | {
       path: string;
-      exportName: string;
+      moduleExportKey: string;
     },
   };
 

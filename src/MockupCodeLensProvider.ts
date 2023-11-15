@@ -18,9 +18,6 @@ export class MockupCodeLensProvider implements CodeLensProvider {
     // "export default {" syntax
     const legacyExportRegex = /export (default) {/g;
 
-    // On each line of the document, look for a match
-    // If there is a match, create a CodeLens for it
-    // and add it to the array of CodeLenses
     const codeLenses: CodeLens[] = [];
     for (let i = 0; i < document.lineCount; i++) {
       const line = document.lineAt(i);
@@ -34,27 +31,31 @@ export class MockupCodeLensProvider implements CodeLensProvider {
       }
 
       // either "default" or the name of the function
-      const exportName = match[1].includes("default") ? "default" : match[2];
+      // This is so that we can access `module.[exportName]` on the client
+      const moduleExportKey = match[1].includes("default")
+        ? "default"
+        : match[2];
+
       const range = new Range(
         i,
         match.index,
         i,
-        match.index + exportName.length
+        match.index + moduleExportKey.length
       );
 
-      const c: Command = {
+      const command: Command = {
         command: "react-mockups.openMockup",
         arguments: [
           {
             mockup: {
               fullPath: document.uri.path,
-              exportName,
+              moduleExportKey,
             },
           },
         ],
         title: "Open Mockup",
       };
-      const codeLens = new CodeLens(range, c);
+      const codeLens = new CodeLens(range, command);
       codeLenses.push(codeLens);
     }
 
