@@ -32,7 +32,11 @@ export function activate(context: vscode.ExtensionContext) {
       );
 
       if (!websocketServer) {
-        websocketServer = createWebsocketServer("127.0.0.1", 1337);
+        const config = vscode.workspace.getConfiguration("react-mockups");
+        const host = config.get<string>("websocket.host", "127.0.0.1");
+        const port = config.get<number>("websocket.port", 1337);
+        websocketServer = createWebsocketServer(host, port);
+        log.appendLine(`[WebSocket Server]: Created server on ${host}:${port}`);
       }
       websocketServer.broadcast("VIEW", {
         path: relativePath,

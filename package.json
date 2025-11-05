@@ -2,7 +2,7 @@
   "name": "react-mockups-vscode",
   "displayName": "react-mockups",
   "description": "View and test isolated components in React projects",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "author": {
     "name": "jamsch",
@@ -19,6 +19,25 @@
   "activationEvents": [
     "workspaceContains:**/*.mockup.tsx"
   ],
+  "contributes": {
+    "configuration": {
+      "title": "React Mockups",
+      "properties": {
+        "react-mockups.websocket.host": {
+          "type": "string",
+          "default": "127.0.0.1",
+          "description": "Hostname for the WebSocket server",
+          "markdownDescription": "Hostname for the WebSocket server. Defaults to `127.0.0.1`."
+        },
+        "react-mockups.websocket.port": {
+          "type": "number",
+          "default": 1337,
+          "description": "Port number for the WebSocket server",
+          "markdownDescription": "Port number for the WebSocket server. Defaults to `1337`."
+        }
+      }
+    }
+  },
   "main": "./out/extension.js",
   "scripts": {
     "vscode:prepublish": "pnpm run compile",
@@ -29,19 +48,14 @@
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
-    "@types/mocha": "^10.0.4",
-    "@types/node": "18.18.9",
-    "@types/vscode": "^1.84.1",
-    "@types/ws": "^8.5.9",
-    "@typescript-eslint/eslint-plugin": "^6.11.0",
-    "@typescript-eslint/parser": "^6.11.0",
-    "@vscode/test-electron": "^2.3.6",
-    "eslint": "^8.53.0",
-    "glob": "^10.3.10",
-    "mocha": "^10.2.0",
-    "typescript": "^5.2.2"
+    "@types/node": "24.10.0",
+    "@types/vscode": "^1.105.0",
+    "@types/ws": "^8.18.1",
+    "@vscode/test-electron": "^2.5.2",
+    "glob": "^11.0.3",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
-    "ws": "^8.14.2"
+    "ws": "^8.18.3"
   }
 }
