@@ -10,6 +10,16 @@ let websocketServer: ReturnType<typeof createWebsocketServer> | null = null;
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
+  try {
+    log.appendLine("[React Mockups]: Extension activated");
+    log.show(true); // Show the output channel
+  } catch (error) {
+    console.error("[React Mockups] Error during activation:", error);
+    vscode.window.showErrorMessage(
+      `React Mockups extension failed to activate: ${error}`
+    );
+  }
+
   vscode.commands.registerCommand(
     "react-mockups.openMockup",
     (args: { mockup: { fullPath: string; moduleExportKey: string } }) => {
