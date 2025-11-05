@@ -57,7 +57,23 @@ export function activate(context: vscode.ExtensionContext) {
   );
 
   context.subscriptions.push(codeLensProviderDisposable);
+
+  vscode.commands.registerCommand("react-mockups.stopWebsocketServer", () => {
+    if (websocketServer) {
+      websocketServer.close();
+      websocketServer = null;
+      log.appendLine("[WebSocket Server]: Server stopped");
+      vscode.window.showInformationMessage("WebSocket server stopped");
+    } else {
+      vscode.window.showInformationMessage("WebSocket server is not running");
+    }
+  });
 }
 
 // This method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() {
+  if (websocketServer) {
+    websocketServer.close();
+    websocketServer = null;
+  }
+}
