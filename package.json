@@ -11,7 +11,7 @@
   "repository": "https://github.com/jamsch/react-mockups-vscode",
   "publisher": "jamsch",
   "engines": {
-    "vscode": "^1.84.0"
+    "vscode": "^1.105.0"
   },
   "categories": [
     "Other"
@@ -51,7 +51,9 @@
     "watch": "tsc -watch -p ./",
     "pretest": "pnpm run compile && pnpm run lint",
     "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
+    "test": "node ./out/test/runTest.js",
+    "package": "vsce package",
+    "publish": "vsce publish"
   },
   "devDependencies": {
     "@types/node": "24.10.0",
