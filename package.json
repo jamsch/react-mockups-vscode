@@ -2,7 +2,7 @@
   "name": "react-mockups-vscode",
   "displayName": "react-mockups",
   "description": "View and test isolated components in React projects",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "license": "MIT",
   "author": {
     "name": "jamsch",
