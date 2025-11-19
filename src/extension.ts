@@ -12,7 +12,6 @@ let websocketServer: ReturnType<typeof createWebsocketServer> | null = null;
 export function activate(context: vscode.ExtensionContext) {
   try {
     log.appendLine("[React Mockups]: Extension activated");
-    log.show(true); // Show the output channel
   } catch (error) {
     console.error("[React Mockups] Error during activation:", error);
     vscode.window.showErrorMessage(
